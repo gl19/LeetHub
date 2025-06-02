@@ -1,8 +1,5 @@
 class Solution:
     def predictPartyVictory(self, senate: str) -> str:
-        # Even though it is round based, I don't think it should take more than 2 rounds
-        # Case 1: Unequal R to D: senators cancel out and can win in first round
-        # Case 2: Equal R to D: first senator wins (Example 1)
         banned_r = 0
         banned_d = 0
         x = 2

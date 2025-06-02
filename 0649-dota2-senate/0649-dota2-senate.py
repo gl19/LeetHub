@@ -39,8 +39,6 @@ class Solution:
 
             senate = new_senate_fixed
 
-            # print(senate)
-
         if banned_r > 0:
             return 'Dire'
 

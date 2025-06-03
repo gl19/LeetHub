@@ -2,12 +2,12 @@ class Solution:
     def calculate(self, s: str) -> int:
         s = s.replace(' ', '')
         
-        # Base case
-        plus_count = s.count('+')
-        minus_count = s.count('-')
-        paren_count = s.count('(') + s.count(')')
-        if paren_count + plus_count + minus_count == 0 or paren_count == 0 and plus_count == 0 and minus_count == 1 and s[0] == '-':
-            return int(s)
+        # # Base case
+        # plus_count = s.count('+')
+        # minus_count = s.count('-')
+        # paren_count = s.count('(') + s.count(')')
+        # if paren_count + plus_count + minus_count == 0 or paren_count == 0 and plus_count == 0 and minus_count == 1 and s[0] == '-':
+        #     return int(s)
 
         numbers = 0
         left_bracket = None

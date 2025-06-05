@@ -7,32 +7,27 @@ class Solution:
             if c1 in d:
                 d[c1].add(c2)
             else:
-                d[c1] = set([c1, c2])
+                d[c1] = set([c2])
 
             if c2 in d:
                 d[c2].add(c1)
             else:
-                d[c2] = set([c1, c2])
+                d[c2] = set([c1])
 
         
-        def dfs(cur, visited, min_char):
-            if cur in visited:   
-                return
-
+        def dfs(cur, visited):
             visited.add(cur)
-            has_visited_all = True
-            for candidate in d[cur]:
-                if candidate not in visited:
-                    has_visited_all = False
-                    dfs(candidate, visited.copy(), min(cur, candidate))
+            smallest = cur
+            for neighbor in d[cur]:
+                if neighbor not in visited:
+                    candidate = dfs(neighbor, visited)
+                    if candidate < smallest:
+                        smallest = candidate
 
-            if has_visited_all:
-                for c in visited:
-                    if c not in cache or min_char < cache[c]:
-                        cache[c] = min_char
+            return smallest
         
         for c in d.keys():
-            dfs(c, set(), c)
+            cache[c] = dfs(c, set())
 
         ret_str = ''
         for c in baseStr:

@@ -1,22 +1,29 @@
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        n = len(intervals)
-        intervals.sort()
+        
+        # If there is no meeting to schedule then no room needs to be allocated.
+        if not intervals:
+            return 0
 
-        num_rooms = 0
-        max_rooms = 0
-        heap = []
-        for i in range(n):
-            start, end = intervals[i][0], intervals[i][1]
-            while len(heap) > 0 and heap[0] <= start:
-                num_rooms -= 1
-                heapq.heappop(heap)
+        # The heap initialization
+        free_rooms = []
 
-            num_rooms += 1
-            heapq.heappush(heap, end)
+        # Sort the meetings in increasing order of their start time.
+        intervals.sort(key= lambda x: x[0])
 
-            if num_rooms > max_rooms:
-                max_rooms = num_rooms
+        # Add the first meeting. We have to give a new room to the first meeting.
+        heapq.heappush(free_rooms, intervals[0][1])
 
-        return max_rooms
+        # For all the remaining meeting rooms
+        for i in intervals[1:]:
 
+            # If the room due to free up the earliest is free, assign that room to this meeting.
+            if free_rooms[0] <= i[0]:
+                heapq.heappop(free_rooms)
+
+            # If a new room is to be assigned, then also we add to the heap,
+            # If an old room is allocated, then also we have to add to the heap with updated end time.
+            heapq.heappush(free_rooms, i[1])
+
+        # The size of the heap tells us the minimum rooms required for all the meetings.
+        return len(free_rooms)

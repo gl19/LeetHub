@@ -15,14 +15,14 @@ class Solution:
                 if nums[i + 1] - nums[i] <= mid:
                     counter += 1
                     i += 1
-
+                
                 i += 1
                 
             if counter >= p:
                 r = mid - 1
             else:
                 l = mid + 1
-                
+
         return l
             
 

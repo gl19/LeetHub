@@ -1,13 +1,26 @@
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
-        unique_permutations = set()
-        def helper(permutation, remaining_nums):
-            if len(remaining_nums) == 0:
-               unique_permutations.add(tuple(permutation))
-               return
+        nums.sort()
+        result = []
+        n = len(nums)
+        used = [False] * n
+        def helper(permutation):
+            if len(permutation) == n:
+                result.append(list(permutation))
+                return
 
-            for i in range(len(remaining_nums)):
-                helper(permutation + [remaining_nums[i]], remaining_nums[:i] + remaining_nums[i + 1:])
+            for i in range(n):
+                if used[i]:
+                    continue
+                
+                if i > 0 and nums[i] == nums[i-1] and not used[i-1]:
+                    continue
 
-        helper([], nums)
-        return list(unique_permutations)
+                used[i] = True
+                permutation.append(nums[i])
+                helper(permutation)
+                permutation.pop()
+                used[i] = False
+
+        helper([])
+        return result

@@ -1,9 +1,7 @@
 class Solution:
     def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
         n = len(intervals)
-        start_idx = [(start, i) for i, (start, end) in enumerate(intervals)]
-        start_idx.sort()
-        print(start_idx)
+        start_idx = sorted([(start, i) for i, (start, end) in enumerate(intervals)])
         def binary_search(end):
             l, r = 0, n
             while l < r:

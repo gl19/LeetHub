@@ -9,25 +9,27 @@ class Solution:
         paths = []
         def helper(node, total, path):
             nonlocal targetSum, paths
-            if not node:
-                return
-
             total += node.val
             path.append(node.val)
 
             if not node.left and not node.right:
                 if total == targetSum:
-                    paths.append(path)
+                    paths.append(path.copy())
 
                 return
 
             if node.left:
-                helper(node.left, total, path.copy())
-
+                helper(node.left, total, path)
+                path.pop()
+                
+            
             if node.right:
-                helper(node.right, total, path.copy())
+                helper(node.right, total, path)
+                path.pop()
 
-        helper(root, 0, [])
+        if root:
+            helper(root, 0, [])
+            
         return paths
                 
             

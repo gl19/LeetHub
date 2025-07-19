@@ -1,4 +1,7 @@
 class Solution:
+    def num_pairs(self, n):
+        return sum([i for i in range(1, n)])
+
     def tupleSameProduct(self, nums: List[int]) -> int:
         products = defaultdict(list)
         dedup = list(dict.fromkeys(nums))
@@ -9,8 +12,8 @@ class Solution:
         
         pairs = 0
         for product in products.keys():
-            if len(products[product]) > 1:
-                pairs += 2 ** (len(products[product]) + 1)
+            n = len(products[product])
+            if n > 1:
+                pairs += 8 * self.num_pairs(n)
 
         return pairs
-

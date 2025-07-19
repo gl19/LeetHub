@@ -9,10 +9,8 @@ class Solution:
         
         pairs = 0
         for product in products.keys():
-            for pair1 in products[product]:
-                for pair2 in products[product]:
-                    if (pair1[0] not in pair2) and (pair1[1] not in pair2):
-                        pairs += 4
+            if len(products[product]) > 1:
+                pairs += 2 ** (len(products[product]) + 1)
 
         return pairs
 

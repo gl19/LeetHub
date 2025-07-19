@@ -9,10 +9,10 @@ class Solution:
             for num2 in dedup[i + 1:]:
                 products[num1 * num2].append((num1, num2))
         
-        pairs = 0
-        for product in products.keys():
-            n = len(products[product])
+        total_pairs = 0
+        for pairs in products.values():
+            n = len(pairs)
             if n > 1:
-                pairs += 8 * self.num_pairs(n)
+                total_pairs += 8 * self.num_pairs(n)
 
-        return pairs
+        return total_pairs
